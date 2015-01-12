@@ -1,0 +1,7 @@
+app/code/local/Aydus/GeoStores                                           app/code/local/Aydus/GeoStores/
+app/design/adminhtml/default/default/layout/aydus/geostores.xml          app/design/adminhtml/default/default/layout/aydus/geostores.xml
+app/design/adminhtml/default/default/template/aydus/geostores/           app/design/adminhtml/default/default/template/aydus/geostores/
+app/etc/modules/Aydus_GeoStores.xml                                      app/etc/modules/
+skin/adminhtml/default/default/aydus/geostores/                          skin/adminhtml/default/default/aydus/geostores/
+
+@shell rm -rf $PROJECT/var/cache/*

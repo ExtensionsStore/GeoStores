@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GeoStores config
+ *
+ * @category   Aydus
+ * @package	   Aydus_GeoStores
+ * @author     Aydus Consulting <davidt@aydus.com>
+ */
+-->
+<config>
+    <modules>
+        <Aydus_GeoStores>
+            <version>1.0.0</version>
+        </Aydus_GeoStores>
+    </modules>
+	<admin>
+	    <routers>
+	        <adminhtml>
+	            <args>
+	                <modules>
+	                    <Aydus_GeoStores before="Mage_Adminhtml">Aydus_GeoStores_Adminhtml</Aydus_GeoStores>
+	                </modules>
+	            </args>
+	        </adminhtml>
+	    </routers>
+	</admin>
+    <adminhtml>
+        <events>
+            <admin_session_user_login_success>
+                <observers>
+                    <geostores_registeradmin>
+                        <class>aydus_geostores/observer</class>
+                        <method>setAdminIsLoggedIn</method>
+                    </geostores_registeradmin>
+                </observers>
+            </admin_session_user_login_success>
+        </events>
+        <layout>
+            <updates>
+                <aydus_geostores>
+                    <file>aydus/geostores.xml</file>
+                </aydus_geostores>
+            </updates>
+        </layout>        
+    </adminhtml>
+	<frontend>
+		<events>
+			<controller_action_layout_generate_blocks_before>
+		        <observers>
+		            <geostores_removestoreswitcher>
+		                <class>aydus_geostores/observer</class>
+		                <method>removeStoreSwitcher</method>
+		            </geostores_removestoreswitcher>
+		        </observers>
+			</controller_action_layout_generate_blocks_before>
+		</events>        
+	</frontend>      
+    <crontab>
+        <jobs>
+            <geostores>
+                <schedule>
+                    <cron_expr>0 * 1 * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>geostores/observer::updateGeoip</model>
+                </run>
+            </geostores>
+        </jobs>
+    </crontab>
+    <global>
+        <blocks>
+            <aydus_geostores>
+                <class>Aydus_GeoStores_Block</class>
+            </aydus_geostores>
+        </blocks>
+        <models>
+            <aydus_geostores>
+                <class>Aydus_GeoStores_Model</class>
+                <resourceModel>aydus_geostores_resource</resourceModel>
+            </aydus_geostores>
+            <aydus_geostores_resource>
+                <class>Aydus_GeoStores_Model_Resource</class>
+                <entities>
+                    <adminlogin>
+                        <table>aydus_geostores_adminlogin</table>
+                    </adminlogin>
+                    <rule>
+                        <table>aydus_geostores_rule</table>
+                    </rule>
+                </entities>
+            </aydus_geostores_resource>            
+        </models>
+        <helpers>
+            <aydus_geostores>
+                <class>Aydus_GeoStores_Helper</class>
+            </aydus_geostores>
+        </helpers>
+        <resources>
+            <aydus_geostores_setup>
+                <setup>
+                    <module>Aydus_GeoStores</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </aydus_geostores_setup>        
+        </resources>        
+    </global>
+    <default>
+        <aydus_geostores>
+            <configuration>
+	            <geostores_enabled>1</geostores_enabled>
+            </configuration>
+        </aydus_geostores>
+    </default>	         
+</config>

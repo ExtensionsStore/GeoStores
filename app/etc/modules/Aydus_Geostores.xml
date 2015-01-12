@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * GeoStores module
+ *
+ * @category   Aydus
+ * @package	   Aydus_GeoStores
+ * @author     Aydus Consulting <davidt@aydus.com>
+ */
+-->
+<config>
+    <modules>
+        <Aydus_GeoStores>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Aydus_GeoStores>
+    </modules>
+</config>

@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+.rule-param-wait {
+	display:none; 
+}
+
+.rule-remove {
+	display: inline-block;
+	float: right;
+}
