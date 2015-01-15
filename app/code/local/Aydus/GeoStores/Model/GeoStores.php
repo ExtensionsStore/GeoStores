@@ -334,6 +334,26 @@ class Aydus_GeoStores_Model_GeoStores
 	 */	
 	public static function checkStore(&$mageRunCode = '', &$mageRunType = 'store')
 	{		
+		//no need to check admin
+		$request = Mage::app()->getRequest();
+		$admin = (string)Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName');
+		
+		$path = trim($request->getPathInfo(), '/');
+		
+		if ($path) {
+		    $p = explode('/', $path);
+		} else {
+		    $p = explode('/', (string)Mage::getConfig()->getNode('default/web/default/admin'));
+		}
+		
+		$module = $p[0];
+		
+		if ($module == $admin){
+		    	
+		    return array($mageRunCode, $mageRunType);
+		}		
+		
+		//check store
 		$store = Mage::app()->getStore();
 		$storeId = $store->getId();
 	
