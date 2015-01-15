@@ -328,12 +328,12 @@ class Aydus_GeoStores_Model_GeoStores
 	/**
 	 * Check user IP record according to rules on every request
 	 * 
-	 * @return string $mageRunCode The 
+	 * @param string $mageRunCode
+	 * @param string $mageRunType
+	 * @return array 
 	 */	
-	public static function checkStore()
-	{
-		$mageRunCode = 'default';
-		
+	public static function checkStore(&$mageRunCode = '', &$mageRunType = 'store')
+	{		
 		$store = Mage::app()->getStore();
 		$storeId = $store->getId();
 	
@@ -354,7 +354,7 @@ class Aydus_GeoStores_Model_GeoStores
 			$session = Mage::getSingleton('core/session');
 			$record = $session->getRecord();
 				
-			if (/*true || */!$record){
+			if (!$record || Mage::helper('aydus_geostores')->isDebug()){
 	
 				$record = Mage::helper('aydus_geostores')->getRecord();
 	
@@ -374,30 +374,44 @@ class Aydus_GeoStores_Model_GeoStores
 	
 				if (in_array($type, array('website', 'group', 'store')) && (int)$redirectId){
 												
-					$redirectStoreView = Mage::getModel('core/store');
-					if ($type == 'group'){
-						$type = 'store_group';
+					$model = $type;
+					
+					if ($model == 'group'){
+						$model = 'store_group';
 					}
-					$storeModel = Mage::getModel('core/'.$type);
-					$storeModel->load($redirectId);
-						
-					if (get_class($storeModel)=='Mage_Core_Model_Website'){
-							
-						$redirectStoreView = $storeModel->getDefaultStore();
-							
-					} else if (get_class($storeModel)=='Mage_Core_Model_Store_Group'){
-							
-						$redirectStoreView = $storeModel->getDefaultStore();
-						
-					} else {
-						
-						$redirectStoreView = $storeModel;
+					$typeModel = Mage::getModel('core/'.$model);
+					$typeModel->load($redirectId);
+					
+					if ($type == 'store' && $typeModel->getId() && !$typeModel->getIsActive()){
+						$typeModel = $typeModel->getWebsite();
+						$type = 'website';
 					}
-	
-					if ($redirectStoreView->getId() && $redirectStoreView->getIsActive()){
-							
-						$mageRunCode = $redirectStoreView->getCode();
+						
+					if ($typeModel->getId()){
+												
+						$mageRunCode = ($type == 'group') ? $typeModel->getId(): $typeModel->getCode();
+						$mageRunType = $type;
+						
+						if ($type == 'website'){
+						    	
+						    $redirectStoreView = $typeModel->getDefaultStore();
+						    	
+						} else if ($type == 'group'){
+						    	
+						    $redirectStoreView = $typeModel->getDefaultStore();
+						
+						} else {
+						
+						    $redirectStoreView = $typeModel;
+						}		
 
+						$storeViewCode = $redirectStoreView->getCode();
+						
+						$cookie = Mage::getSingleton('core/cookie');
+						$cookie->set('store', $storeViewCode ,time()+604800,'/');
+						$_COOKIE['store'] = $storeViewCode;
+						$_GET['___store'] = $storeViewCode;
+						
 					} else {
 							
 						Mage::log("Redirect type: $type id: $redirectId does not exist or is not active.",null,'aydus_geostores.log');
@@ -409,7 +423,7 @@ class Aydus_GeoStores_Model_GeoStores
 	
 		}
 	
-		return $mageRunCode;
+		return array($mageRunCode, $mageRunType);
 	}	
 		
 }

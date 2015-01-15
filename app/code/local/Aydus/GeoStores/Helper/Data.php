@@ -25,11 +25,11 @@ class Aydus_GeoStores_Helper_Data extends Mage_Core_Helper_Abstract
 			include('lib'.DS.'geoipcity.inc');
 			
 			//include geoip database
-			$geoipDb = Mage::getBaseDir().Mage::getStoreConfig('aydus_geostores/configuration/geoip_db');
+			$geoipDb = Mage::getStoreConfig('aydus_geostores/configuration/geoip_db');
 			
-			if ($geoipDb && file_exists($geoipDb)){
+			if ($geoipDb && file_exists(Mage::getBaseDir().$geoipDb)){
 			    	
-			    $geoipDb = str_replace('/',DS,$geoipDb);
+			    $geoipDb = str_replace('/',DS,Mage::getBaseDir().$geoipDb);
 			    $path = $geoipDb;
 			
 			} else if (file_exists(Mage::getBaseDir('var').DS.'aydus'.DS.'geostores'.DS.'GeoIPCity.dat')){
@@ -58,7 +58,7 @@ class Aydus_GeoStores_Helper_Data extends Mage_Core_Helper_Abstract
 	 * @param string $ip
 	 * @return geoiprecord|boolean
 	 */
-	public function getRecord($ip)
+	public function getRecord($ip = null)
 	{
 		try {
 			

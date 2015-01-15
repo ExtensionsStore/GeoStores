@@ -53,7 +53,7 @@ class Aydus_GeoStores_Model_Observer
 					
 		} 
 		
-		return $this;
+		return true;
 	}
 	
 	/**

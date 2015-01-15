@@ -12,6 +12,6 @@ Mage::app();
 
 Aydus_GeoStores_Model_GeoStores::init();
 
-$mageRunCode = Aydus_GeoStores_Model_GeoStores::checkStore();
+Aydus_GeoStores_Model_GeoStores::checkStore($mageRunCode, $mageRunType);
 
 Mage::unregister('controller');
