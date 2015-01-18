@@ -376,7 +376,7 @@ class Aydus_GeoStores_Model_GeoStores
 				
 			if (!$record || Mage::helper('aydus_geostores')->isDebug()){
 	
-				$record = Mage::helper('aydus_geostores')->getRecord();
+				$record = Mage::helper('aydus_geostores/geoip')->getRecord();
 	
 				$session->setRecord($record);
 			}

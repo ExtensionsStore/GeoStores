@@ -13,7 +13,7 @@ class Aydus_GeoStores_Adminhtml_System_GeoStoresController extends Mage_Adminhtm
 	
 	public function updateGeoipAction()
 	{
-		$result = Mage::helper('aydus_geostores')->updateGeoip();
+		$result = Mage::helper('aydus_geostores/geoip')->updateGeoip();
 		
 		if (!$result['error']){
 		     
