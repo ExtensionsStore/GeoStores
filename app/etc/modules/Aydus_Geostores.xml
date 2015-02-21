@@ -12,7 +12,7 @@
     <modules>
         <Aydus_GeoStores>
             <active>true</active>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
         </Aydus_GeoStores>
     </modules>
 </config>
