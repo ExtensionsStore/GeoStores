@@ -1,5 +1,6 @@
 GeoStores
 ================
+Reroute users to stores based on their geography: country, region/state, city. 
 
 Description
 -----------
