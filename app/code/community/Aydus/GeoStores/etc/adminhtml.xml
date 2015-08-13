@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * Geostores admin acl
- *
- * @category   Aydus
- * @package	   Aydus_GeoStores
- * @author     Aydus Consulting <davidt@aydus.com>
- */
+* Geostores admin acl
+*
+* @category   Aydus
+* @package	   Aydus_GeoStores
+* @author     Aydus Consulting <davidt@aydus.com>
+*/
 -->
 <config>
-    <acl>
-        <resources>
-            <admin>
-                <children>
-                    <system>
-                        <children>
-                            <config>
-                                <children>
-                                    <aydus_geostores translate="title" module="aydus_geostores">
-                                        <title>Geostores Settings</title>
-                                    </aydus_geostores>
-                                </children>
-                            </config>
-                        </children>
-                    </system>
-                </children>
-            </admin>
-        </resources>
-    </acl>
-    <menu>
+<acl>
+  <resources>
+    <admin>
+      <children>
         <system>
-            <children>
-                <store>
-                    <children>
-                        <users translate="title" module="aydus_geostores">
-                            <title>GeoStores</title>
-                            <action>adminhtml/system_geostores/rules</action>
-                        </users>
-                    </children>
-                </store>
-            </children>
+          <children>
+            <config>
+              <children>
+                <aydus_geostores translate="title" module="aydus_geostores">
+                  <title>GeoStores Settings</title>
+                </aydus_geostores>
+              </children>
+            </config>
+          </children>
         </system>
-	</menu>    
+      </children>
+    </admin>
+  </resources>
+</acl>
+<menu>
+  <system>
+    <children>
+      <store>
+        <children>
+          <users translate="title" module="aydus_geostores">
+            <title>GeoStores</title>
+            <action>adminhtml/system_geostores/rules</action>
+          </users>
+        </children>
+      </store>
+    </children>
+  </system>
+</menu>    
 </config>
