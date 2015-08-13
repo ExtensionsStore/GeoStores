@@ -8,7 +8,7 @@
  * @author     Aydus Consulting <davidt@aydus.com>
  */
 
-class Aydus_Geostores_Block_Adminhtml_System_GeoStores_Rule extends Mage_Adminhtml_Block_Widget
+class Aydus_GeoStores_Block_Adminhtml_System_GeoStores_Rule extends Mage_Adminhtml_Block_Widget
 {
 	
 	public function __construct()
