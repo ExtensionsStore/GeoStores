@@ -1,9 +1,9 @@
 {
-    "name": "aydus/geostores",
+    "name": "extensions_store/geostores",
     "license": "GPL-3.0",
     "type": "magento-module",
     "description": "Reroute users to stores based on their geography: country, region/state, city.",
-    "homepage": "https://github.com/aydus/GeoStores.git",
+    "homepage": "https://github.com/ExtensionsStore/GeoStores.git",
     "require": {
         "php": ">=5.3",
         "magento-hackathon/magento-composer-installer": "*"
@@ -11,7 +11,7 @@
     "authors": [
         {
             "name": "David Tay",
-            "email": "davidt@aydus.com",
+            "email": "davidt@extensions_store.com",
             "role": "Author/Maintainer"
         }
     ]

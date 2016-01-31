@@ -1,5 +1,5 @@
-app/code/community/Aydus/GeoStores                                       app/code/community/Aydus/GeoStores/
-app/design/adminhtml/default/default/layout/aydus/geostores.xml          app/design/adminhtml/default/default/layout/aydus/geostores.xml
-app/design/adminhtml/default/default/template/aydus/geostores/           app/design/adminhtml/default/default/template/aydus/geostores/
-app/etc/modules/Aydus_GeoStores.xml                                      app/etc/modules/
-skin/adminhtml/default/default/aydus/geostores/                          skin/adminhtml/default/default/aydus/geostores/
+app/code/community/ExtensionsStore/GeoStores                                       app/code/community/ExtensionsStore/GeoStores
+app/design/adminhtml/default/default/layout/extensions_store/geostores.xml         app/design/adminhtml/default/default/layout/extensions_store/geostores.xml
+app/design/adminhtml/default/default/template/extensions_store/geostores           app/design/adminhtml/default/default/template/extensions_store/geostores
+app/etc/modules/ExtensionsStore_GeoStores.xml                                      app/etc/modules/ExtensionsStore_GeoStores.xml
+skin/adminhtml/default/default/extensions_store/geostores                          skin/adminhtml/default/default/extensions_store/geostores

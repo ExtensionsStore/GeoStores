@@ -19,7 +19,7 @@ Include this line:
 
 <pre>
 /* Check user IP address according to GeoStores rules */
-require_once MAGENTO_ROOT . '/app/code/community/Aydus/GeoStores/includes/GeoStores.php';
+require_once MAGENTO_ROOT . '/app/code/community/ExtensionsStore/GeoStores/includes/GeoStores.php';
 </pre>
 at the bottom of the index.php file that is in the root of your Magento install. For example:
 <pre>
@@ -28,7 +28,7 @@ at the bottom of the index.php file that is in the root of your Magento install.
 $mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
 
 /* Check user IP address geography according to business rules */
-require_once MAGENTO_ROOT . '/app/code/community/Aydus/GeoStores/includes/GeoStores.php';
+require_once MAGENTO_ROOT . '/app/code/community/ExtensionsStore/GeoStores/includes/GeoStores.php';
 
 Mage::run($mageRunCode, $mageRunType);
 </pre>

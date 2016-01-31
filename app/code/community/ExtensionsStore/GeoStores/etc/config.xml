@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+/**
+* GeoStores config
+*
+* @category   ExtensionsStore
+* @package	   ExtensionsStore_GeoStores
+* @author     Extensions Store <admin@extensions-store.com>
+*/
+-->
+<config>
+	<modules>
+		<ExtensionsStore_GeoStores>
+			<version>1.0.1</version>
+		</ExtensionsStore_GeoStores>
+	</modules>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<ExtensionsStore_GeoStores before="Mage_Adminhtml">ExtensionsStore_GeoStores_Adminhtml</ExtensionsStore_GeoStores>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	<adminhtml>
+		<events>
+			<admin_session_user_login_success>
+				<observers>
+					<geostores_registeradmin>
+						<class>extensions_store_geostores/observer</class>
+						<method>setAdminIsLoggedIn</method>
+					</geostores_registeradmin>
+				</observers>
+			</admin_session_user_login_success>
+		</events>
+		<layout>
+			<updates>
+				<extensions_store_geostores>
+					<file>extensions_store/geostores.xml</file>
+				</extensions_store_geostores>
+			</updates>
+		</layout>
+	</adminhtml>
+	<frontend>
+		<events>
+			<controller_action_layout_generate_blocks_before>
+				<observers>
+					<geostores_removestoreswitcher>
+						<class>extensions_store_geostores/observer</class>
+						<method>removeStoreSwitcher</method>
+					</geostores_removestoreswitcher>
+				</observers>
+			</controller_action_layout_generate_blocks_before>
+		</events>
+	</frontend>
+	<crontab>
+		<jobs>
+			<geostores>
+				<schedule>
+					<cron_expr>0 * 1 * *</cron_expr>
+				</schedule>
+				<run>
+					<model>geostores/observer::updateGeoip</model>
+				</run>
+			</geostores>
+		</jobs>
+	</crontab>
+	<global>
+		<blocks>
+			<extensions_store_geostores>
+				<class>ExtensionsStore_GeoStores_Block</class>
+			</extensions_store_geostores>
+		</blocks>
+		<models>
+			<extensions_store_geostores>
+				<class>ExtensionsStore_GeoStores_Model</class>
+				<resourceModel>extensions_store_geostores_resource</resourceModel>
+			</extensions_store_geostores>
+			<extensions_store_geostores_resource>
+				<class>ExtensionsStore_GeoStores_Model_Resource</class>
+				<entities>
+					<adminlogin>
+						<table>extensions_store_geostores_adminlogin</table>
+					</adminlogin>
+					<rule>
+						<table>extensions_store_geostores_rule</table>
+					</rule>
+				</entities>
+			</extensions_store_geostores_resource>
+		</models>
+		<helpers>
+			<extensions_store_geostores>
+				<class>ExtensionsStore_GeoStores_Helper</class>
+			</extensions_store_geostores>
+		</helpers>
+		<resources>
+			<extensions_store_geostores_setup>
+				<setup>
+					<module>ExtensionsStore_GeoStores</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</extensions_store_geostores_setup>
+		</resources>
+	</global>
+	<default>
+		<extensions_store_geostores>
+			<configuration>
+				<geostores_enabled>1</geostores_enabled>
+			</configuration>
+		</extensions_store_geostores>
+	</default>
+</config>

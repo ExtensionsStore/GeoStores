@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Geostores admin acl
+*
+* @category   ExtensionsStore
+* @package	   ExtensionsStore_GeoStores
+* @author     Extensions Store <admin@extensions-store.com>
+*/
+-->
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<extensions_store_geostores
+										translate="title" module="extensions_store_geostores">
+										<title>GeoStores Settings</title>
+									</extensions_store_geostores>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<system>
+			<children>
+				<store>
+					<children>
+						<users translate="title" module="extensions_store_geostores">
+							<title>GeoStores</title>
+							<action>adminhtml/system_geostores/rules</action>
+						</users>
+					</children>
+				</store>
+			</children>
+		</system>
+	</menu>
+</config>

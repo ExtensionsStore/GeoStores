@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GeoStores Rules admin
+ *
+ * @category   ExtensionsStore
+ * @package	   ExtensionsStore_GeoStores
+ * @author     Extensions Store <admin@extensions-store.com>
+ */
+-->
+<layout>
+
+	<adminhtml_system_geostores_rules>
+		<reference name="head">
+			<action method="addItem">
+				<type>skin_js</type>
+				<script>extensions_store/geostores/geostores.js</script>
+			</action>
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>extensions_store/geostores/geostores.css</name>
+			</action>
+		</reference>
+
+		<reference name="content">
+			<block type="extensions_store_geostores/adminhtml_system_geostores_rules"
+				name="geostores_rules" template="extensions_store/geostores/rules.phtml">
+				<block type="extensions_store_geostores/adminhtml_system_geostores_rule"
+					name="geostores_rule" template="extensions_store/geostores/rule.phtml"></block>
+			</block>
+		</reference>
+
+	</adminhtml_system_geostores_rules>
+
+</layout>
