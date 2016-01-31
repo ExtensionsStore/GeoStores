@@ -236,7 +236,7 @@ class ExtensionsStore_GeoStores_Model_Rule extends Mage_Core_Model_Abstract {
 		$country = $normalizedData ['country'];
 		$region = $normalizedData ['region'];
 		$city = $normalizedData ['city'];
-		$redirect = $$normalizedData ['redirect'];
+		$redirect = $normalizedData ['redirect'];
 		$parentId = 0;
 		
 		if ($city) {
