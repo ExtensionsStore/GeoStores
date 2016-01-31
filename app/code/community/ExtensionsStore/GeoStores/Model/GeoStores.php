@@ -16,7 +16,7 @@ class ExtensionsStore_GeoStores_Model_GeoStores {
 	protected static $_rules;
 	public static function init() {
 		$cache = Mage::app ()->getCache ();
-		$cacheKey = md5 ( get_class ( self ) );
+		$cacheKey = md5 ( 'ExtensionsStore_GeoStores_Model_GeoStores' );
 		$rulesSer = $cache->load ( $cacheKey );
 		self::$_rules = unserialize ( $rulesSer );
 		
