@@ -1,5 +1,5 @@
 {
-    "name": "extensions_store/geostores",
+    "name": "extensions-store/geostores",
     "license": "GPL-3.0",
     "type": "magento-module",
     "description": "Reroute users to stores based on their geography: country, region/state, city.",
