@@ -8,6 +8,7 @@
  * @author     Extensions Store <admin@extensions-store.com>
  */
 class ExtensionsStore_GeoStores_Model_GeoStores {
+	const CACHE_KEY = 'ExtensionsStore_GeoStores_Model_GeoStores';
 	/**
 	 * Array to hold country-region-city rules
 	 *
@@ -16,7 +17,7 @@ class ExtensionsStore_GeoStores_Model_GeoStores {
 	protected static $_rules;
 	public static function init() {
 		$cache = Mage::app ()->getCache ();
-		$cacheKey = md5 ( 'ExtensionsStore_GeoStores_Model_GeoStores' );
+		$cacheKey = md5 ( ExtensionsStore_GeoStores_Model_GeoStores::CACHE_KEY );
 		$rulesSer = $cache->load ( $cacheKey );
 		self::$_rules = unserialize ( $rulesSer );
 		
@@ -339,10 +340,31 @@ class ExtensionsStore_GeoStores_Model_GeoStores {
 			);
 		}
 		
+		$store = null;
+		$storeId = null;
+				
 		// check store
-		$store = Mage::app ()->getStore ();
-		$storeId = $store->getId ();
-		
+		switch ($mageRunType){
+			case 'website' :
+				$website = Mage::getModel('core/website')->load($mageRunCode, 'code');
+				$store = $website->getDefaultGroup ()->getDefaultStore ();
+				$storeId = $store->getId();
+				break;
+			case 'group' :
+				$group = Mage::getModel('core/store_group')->load($mageRunCode);
+				$store = $group->getDefaultStore ();
+				$storeId = $group->getDefaultStoreId ();
+				break;
+			case 'store' :
+				$store = Mage::getModel('core/store')->load($mageRunCode, 'code');
+				$storeId = $store->getId();
+				break;
+			default :
+				$store = Mage::app ()->getStore ();
+				$storeId = $store->getId ();
+				break;
+		}
+				
 		$geostoresEnabled = Mage::getStoreConfig ( 'extensions_store_geostores/configuration/geostores_enabled', $storeId );
 		
 		// api may be 0
@@ -358,13 +380,14 @@ class ExtensionsStore_GeoStores_Model_GeoStores {
 			
 			// get ip record
 			$session = Mage::getSingleton ( 'core/session' );
-			$record = $session->getRecord ();
+			$ip = Mage::helper ( 'extensions_store_geostores' )->getIp (true);
+			$record = $session->getData ($ip);
 			
 			if (! $record || Mage::helper ( 'extensions_store_geostores' )->isDebug ()) {
 				
 				$record = Mage::helper ( 'extensions_store_geostores/geoip' )->getRecord ();
 				
-				$session->setRecord ( $record );
+				$session->setData ($ip, $record );
 			}
 			
 			// get redirect rules for this store
@@ -414,6 +437,16 @@ class ExtensionsStore_GeoStores_Model_GeoStores {
 						}
 						
 						$storeViewCode = $redirectStoreView->getCode ();
+						$storeUrl = $store->getUrl();
+						$parsedStoreUrl = parse_url($storeUrl);
+						$parsedStoreHost = $parsedStoreUrl['host'];
+						$redirectUrl = $redirectStoreView->getUrl();
+						$parsedRedirectUrl = parse_url($redirectUrl);
+						$parsedRedirectHost = $parsedRedirectUrl['host'];
+						if ($parsedStoreHost != $parsedRedirectHost){
+							Mage::app()->getResponse()->setRedirect($redirectUrl)->sendResponse();
+							exit();
+						}
 						
 						$cookie = Mage::getSingleton ( 'core/cookie' );
 						$cookie->set ( 'store', $storeViewCode, time () + 604800, '/' );

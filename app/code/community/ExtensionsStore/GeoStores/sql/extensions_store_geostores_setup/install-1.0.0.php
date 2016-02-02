@@ -3,7 +3,9 @@ $this->startSetup ();
 echo 'Starting GeoStores Setup...<br />';
 
 $varPath = Mage::getBaseDir ( 'var' ) . DS . 'extensions_store' . DS . 'geostores';
-mkdir ( $varPath, 0777, true );
+if (!file_exists($varPath)){
+	mkdir ( $varPath, 0777, true );
+}
 
 $this->run ( "CREATE TABLE IF NOT EXISTS {$this->getTable('extensions_store_geostores_adminlogin')} (
 `admin_user_id` INT(11) UNSIGNED NOT NULL,
