@@ -128,6 +128,11 @@ class ExtensionsStore_GeoStores_Adminhtml_System_GeoStoresController extends Mag
 						$rule->save ();
 					}
 					
+					$cache = Mage::app ()->getCache ();
+					$cacheKey = ExtensionsStore_GeoStores_Model_GeoStores::CACHE_KEY;
+					$cacheKey = md5 ($cacheKey);
+					$cache->remove($cacheKey);
+					
 					$this->_getSession ()->addSuccess ( Mage::helper ( 'extensions_store_geostores' )->__ ( 'Rules have been saved.' ) );
 				}
 			} catch ( Mage_Core_Exception $e ) {
