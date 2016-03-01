@@ -79,6 +79,10 @@
 				<class>ExtensionsStore_GeoStores_Model</class>
 				<resourceModel>extensions_store_geostores_resource</resourceModel>
 			</extensions_store_geostores>
+			<geostores>
+				<class>ExtensionsStore_GeoStores_Model</class>
+				<resourceModel>extensions_store_geostores_resource</resourceModel>
+			</geostores>
 			<extensions_store_geostores_resource>
 				<class>ExtensionsStore_GeoStores_Model_Resource</class>
 				<entities>
